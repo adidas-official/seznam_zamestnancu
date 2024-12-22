@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Workplace index{% endblock %}
+
+{% block body %}
+    <h1>Workplace index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for workplace in workplaces %}
+            <tr>
+                <td>{{ workplace.id }}</td>
+                <td>{{ workplace.title }}</td>
+                {% if app.user.roles[0] == 'ROLE_ADMIN' %}
+                    <td>
+                        <a href="{{ path('app_workplace_show', {'id': workplace.id}) }}">show</a>
+                        <a href="{{ path('app_workplace_edit', {'id': workplace.id}) }}">edit</a>
+                    </td>
+                {% else %}
+                    <td>
+                        <a href="{{ path('app_workplace_show', {'id': workplace.id}) }}">show</a>
+                    </td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if app.user.roles[0] == 'ROLE_ADMIN' %}
+        <a href="{{ path('app_workplace_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}

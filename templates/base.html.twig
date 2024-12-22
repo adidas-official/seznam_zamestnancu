@@ -7,12 +7,45 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ps-5 pe-5">
+            <a class="navbar-brand" href="{{ path('app_home') }}">Home</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto {{ app.user ? '' : 'invisible' }}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_employee_index') }}">Employee List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_workplace_index') }}">Workplaces List</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                        </li>
+                        {% if 'ROLE_ADMIN' in app.user.roles %}
+                            <li class="nav-item">
+                                <span class="nav-link">Jste admin</span>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_register') }}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div class="container mt-5">
+            {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
     </body>
 </html>

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Workplace{% endblock %}
+
+{% block body %}
+    <h1>Workplace</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ workplace.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ workplace.title }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_workplace_index') }}">back to list</a>
+
+    <a href="{{ path('app_workplace_edit', {'id': workplace.id}) }}">edit</a>
+
+    {{ include('workplace/_delete_form.html.twig') }}
+{% endblock %}
