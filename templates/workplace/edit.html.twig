@@ -6,8 +6,6 @@
     <h1>Edit Workplace</h1>
 
     {{ include('workplace/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_workplace_index') }}">back to list</a>
-
+    <br>
     {{ include('workplace/_delete_form.html.twig') }}
 {% endblock %}
